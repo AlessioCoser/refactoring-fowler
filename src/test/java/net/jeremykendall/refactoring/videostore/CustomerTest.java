@@ -71,7 +71,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void ChildrensMoviesForOneDayShuoldCostOneAndHalf() {
+    public void ChildrensMoviesForLessThanFourDaysShuoldCostOneAndHalf() {
         Customer customer = new Customer("customerName");
         Movie regularMovie = new Movie("movieTitle", Movie.CHILDRENS);
 
@@ -80,6 +80,20 @@ public class CustomerTest {
         String expected = "Rental Record for customerName\n" +
                 "\tmovieTitle\t1.5\n" +
                 "Amount owed is 1.5\n" +
+                "You earned 1 frequent renter points";
+        assertEquals(expected, customer.statement());
+    }
+
+    @Test
+    public void ChildrenMoviesForMoreThanThreeDaysShouldCostOneAndHalfPerDay() {
+        Customer customer = new Customer("customerName");
+        Movie regularMovie = new Movie("movieTitle", Movie.CHILDRENS);
+
+        customer.addRental(new Rental(regularMovie, 4));
+
+        String expected = "Rental Record for customerName\n" +
+                "\tmovieTitle\t3.0\n" +
+                "Amount owed is 3.0\n" +
                 "You earned 1 frequent renter points";
         assertEquals(expected, customer.statement());
     }
