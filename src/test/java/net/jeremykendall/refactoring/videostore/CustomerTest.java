@@ -97,4 +97,18 @@ public class CustomerTest {
                 "You earned 1 frequent renter points";
         assertEquals(expected, customer.statement());
     }
+
+    @Test
+    public void ShouldOutputHtmlStatementForOneDayRentalOfRegularMovie() {
+        Customer customer = new Customer("customerName");
+        Movie regularMovie = new Movie("movieTitle", Movie.REGULAR);
+
+        customer.addRental(new Rental(regularMovie, 1));
+
+        String expected = "<H1>Rentals for <EM>customerName</EM></H1><P>\n" +
+                "movieTitle: 2.0<BR>\n" +
+                "<P>You owe <EM>2.0</EM><P>\n" +
+                "On this rental you earned <EM>1</EM> frequent renter points</P>";
+        assertEquals(expected, customer.htmlStatement());
+    }
 }
