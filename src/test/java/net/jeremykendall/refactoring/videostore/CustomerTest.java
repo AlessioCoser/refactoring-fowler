@@ -55,4 +55,18 @@ public class CustomerTest {
                 "You earned 1 frequent renter points";
         assertEquals(expected, customer.statement());
     }
+
+    @Test
+    public void NewReleasesRentalsForMoreThanOneDayShouldGiveBonusFrequentRenterPoints() {
+        Customer customer = new Customer("customerName");
+        Movie regularMovie = new Movie("movieTitle", Movie.NEW_RELEASE);
+
+        customer.addRental(new Rental(regularMovie, 2));
+
+        String expected = "Rental Record for customerName\n" +
+                "\tmovieTitle\t6.0\n" +
+                "Amount owed is 6.0\n" +
+                "You earned 2 frequent renter points";
+        assertEquals(expected, customer.statement());
+    }
 }
