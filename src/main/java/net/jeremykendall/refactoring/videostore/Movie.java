@@ -6,7 +6,6 @@ public class Movie {
     public static final int NEW_RELEASE = 1;
 
     private String _title;
-    private int _priceCode;
     private Price _price;
 
     public Movie(String title, int priceCode) {
@@ -15,13 +14,11 @@ public class Movie {
     }
 
     public int getPriceCode() {
-        return _priceCode;
+        return _price.getPriceCode();
     }
 
     public void setPriceCode(int _priceCode) {
-        this._priceCode = _priceCode;
-
-        switch (getPriceCode()) {
+        switch (_priceCode) {
             case Movie.REGULAR:
                 _price = new RegularPrice();
                 break;
