@@ -2,6 +2,10 @@ package net.jeremykendall.refactoring.videostore;
 
 abstract class Price {
     public abstract double getCharge(int daysRented);
+
+    public int getFrequentRenterPoints(int daysRented) {
+        return 1;
+    }
 }
 
 class RegularPrice extends Price {
@@ -16,6 +20,12 @@ class RegularPrice extends Price {
 class NewReleasePrice extends Price {
     public double getCharge(int daysRented) {
         return daysRented * 3;
+    }
+
+    public int getFrequentRenterPoints(int daysRented) {
+        if (daysRented > 1)
+            return 2;
+        return 1;
     }
 }
 
